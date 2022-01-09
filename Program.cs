@@ -64,7 +64,7 @@ public class Option
         double d1 = (Math.Log(U / K) + (b + (s * s) * 0.5) * T) / denom;
         double d2 = d1 - denom;
         // return the put price
-        return (K * Math.Exp((-r * T) * Gauss.N(-d2)) - (U * Math.Exp(b - r) * Gauss.N(-d1));
+        return (K * Math.Exp((-r * T) * Gauss.N(-d2)) - (U * Math.Exp(b - r) * Gauss.N(-d1)));
 
     }
     public void init()
