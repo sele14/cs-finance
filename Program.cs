@@ -152,7 +152,6 @@ public class ConsoleEuropeanOptionFactory : IOptionFactory
         T = Convert.ToDouble(Console.ReadLine());
         Console.Write("Call or Put: ");
         type = Convert.ToString(Console.ReadLine());
-        Console.Write("Strike: ");
 
         Option opt = new Option(type, T, K, b, r, s);
 
