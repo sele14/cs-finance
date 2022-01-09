@@ -108,7 +108,7 @@ public class Option
         init();
         type = optionType;
     }
-    // calculate option price and sensitivities
+    // method to calculate option price and sensitivities
     public double Price(double U)
     {
         if (type == "1")
@@ -121,7 +121,6 @@ public class Option
         }
     }
 }
-
 
 public interface IOptionFactory
 {
@@ -158,5 +157,38 @@ public class ConsoleEuropeanOptionFactory : IOptionFactory
         Option opt = new Option(type, T, K, b, r, s);
 
         return opt;
+    }
+}
+
+// mediator entity to coordinate the data and flow
+public struct Mediator
+{
+    static IOptionFactory getFactory()
+    {
+        return new ConsoleEuropeanOptionFactory();
+    }
+    public void calculate()
+    {
+        // 1. choose how the data in the option will be created
+        IOptionFactory fac = getFactory();
+        // 2. create the option
+        Option myOption = fac.create();
+        // 3. get underlying price
+        Console.Write("Enter the underlying price: ");
+        double S = Convert.ToDouble(Console.ReadLine());
+        // 4. display result
+        Console.WriteLine("Price: {0}", myOption.Price(S));
+
+    }
+}
+
+// main method (application entry point)
+class RunOption
+{
+    static void Main()
+    {
+        // client delegates to the mediator
+        Mediator med = new Mediator();
+        med.calculate();
     }
 }
